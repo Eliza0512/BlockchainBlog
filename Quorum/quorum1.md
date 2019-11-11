@@ -83,5 +83,22 @@ Quorum节点基于Geth做了一下改动：
 
 
 
-### Quorum安全管理
+### Quorum安全管理 - Constellation & Tessera
+
+Constellation和Tessera（以下简称C&T）是一种用Java和Haskell实现的安全传输信息模型，他们的作用就像是网络中的信息传输代理（MTA, Message Transfer Agent）所有消息的传输都通过会话信息秘钥进行加密
+
+> PGP加密, 可以用来发送机密消息。这是通过对称的一组密钥-公钥组合来实现的。消息采用对称加密算法加密，采用一组对称密钥。每个对称密钥只使用一次，所以也叫做会话密钥。[PGP定义介绍](https://baike.baidu.com/item/PGP)
+
+C&T其实是一种多方参与网络中实现个人消息加密的常用组件，在许多应用中都很常见，并不是区块链领域专有技术（笔者注，其实区块链本身就是各种技术的大杂烩，我们很难专门找到一门技术，说它就是区块链 ）。C&T主要包括两个子模块：
+
+- The Node  Quorum使用这个模块实现了PrivateTransactionManager 私有交易管理
+- The Enclave
+
+####Transaction Manager 交易管理
+
+交易管理模块主要负责交易的隐私，包括存储私密交易数据、控制私密交易的访问、与其他参与者的交易管理器进行私密交易载荷的交换。Transaction Manager 本身并不涉及任何私钥和私钥的使用，所有数字加密模块的功能都由The Enclave来完成。
+
+Transaction Manager属于静态/Restful模组，能够非常容易的被加载。
+
+#### The Enclave 
 
