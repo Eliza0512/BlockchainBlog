@@ -18,7 +18,7 @@
 
 [Quorum介绍(一)：Quorum整体结构概述](Quorum/quorum1.md) updated at 11th Nov 2019
 
-
+[Quorum介绍(二)：Quorum共识](Quorum/quorum2.md) updated at 12th Nov 2019
 
 ## Cosmos
 
