@@ -103,3 +103,7 @@ Transaction Manager属于静态/Restful模组，能够非常容易的被加载�
 #### The Enclave 
 
 分布式账本协议通常都会涉及交易验证、参与者授权、历史信息存储（通过hash链）等。为了在加密这一方面实现平行操作的性能扩展和，所有公私钥生成、数据的加密/解密都由Enclave模块完成。
+
+
+
+下一篇：[Quorum介绍(二)：Quorum共识](Quorum/quorum2.md) 
