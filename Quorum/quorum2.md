@@ -94,7 +94,7 @@ Raft算法中就采用任期（Term）的概念，将时间切分为一个个的
 
 
 
-上一篇：[Quorum介绍(一)：Quorum整体结构概述](Quorum/quorum1.md)
+上一篇：[Quorum介绍(一)：Quorum整体结构概述](https://eliza0512.github.io/BlockchainBlog/Quorum/quorum1.html)
 
 下一篇：
 

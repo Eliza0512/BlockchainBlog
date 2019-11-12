@@ -106,4 +106,5 @@ Transaction Manager属于静态/Restful模组，能够非常容易的被加载�
 
 
 
-下一篇：[Quorum介绍(二)：Quorum共识](Quorum/quorum2.md) 
+下一篇：[Quorum介绍(二)：Quorum共识](https://eliza0512.github.io/BlockchainBlog/Quorum/quorum2.html) 
+
