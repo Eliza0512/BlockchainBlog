@@ -1,5 +1,7 @@
 # Quorum介绍（二）：Quorum共识
 
+> 本文篇幅较长，请耐心阅读
+
 我们知道，公共区块链是一个开放的社区，任何人都能够成为一个节点加入网络，在网络中计算，提交交易到链上等，因此公链是没有信任基础的，所以公链的共识第一要义就是证明交易的合法性和真实性，防止恶意成员的捣乱，效率不是第一要义。
 
 与公链的环境不同，有准入门槛的企业链或者联盟链链上的所有成员在加入时实际上是已经获得了某些认可和许可的，因此企业链/联盟链上的成员是有一定信任基础的。在企业级链上我们没有必要使用POW或者POS这种浪费算力或者低效的交易共识。
@@ -81,8 +83,61 @@ Raft算法中就采用任期（Term）的概念，将时间切分为一个个的
 
 | **Ethereum** | **Raft** |
 | ------------ | -------- |
-| minter       |          |
-| verifier     |          |
+| minter       | leader   |
+| verifier     | follower |
+
+Raft共识机制本身保证了同一时间点最多只有一个leader，因此用在以太坊模型下也只会有一个出块者，避免了同时出块或者算力浪费的情况。
+
+在单笔交易(transaction)层级Quorum依然沿用了Ethereum的p2p传输机制，只有在块(block)层级才会使用Raft的传输机制。
+
+其中需要注意到一点，在以太坊中一个节点收到块以后就会立刻记账，而在Quorum模型中，一个块的记录必须遵从Raft协议，每个节点从leader处收到块以后必须报告给leader确认收到以后，再由leader通知各个节点进行数据提交（记录）
+
+![Quorum记账示意](raft_block.png)
+
+#### Quorum中一笔交易的生命周期
+
+![交易声明周期](tx_lifetime.jpg)
+
+#### 链的延伸、竞争和校准
+
+在Quorum模型中新块的信息是很有可能和已有块的header信息不符的，最容易发生这种情况的就是选举人更替(挖矿节点更替)，具体描述如下：
+
+```
+ time                   block submissions
+                   node 1                node 2
+  |    [ 0xbeda Parent: 0xacaa ]
+  |
+  |   -- 1 is partitioned; 2 takes over as leader/minter --
+  |
+  |    [ 0x2c52 Parent: 0xbeda ] [ 0xf0ec Parent: 0xbeda ]
+  |                              [ 0x839c Parent: 0xf0ec ]
+  |
+  |   -- 1 rejoins --
+  |
+  v                              [ 0x8b37 Parent: 0x839c ]
+```
+
+假设有两个节点，node1和node2，node1是现有的leader，现有链的最新区块是0xbeda，它的父区块是0xacaa
+
+- 假设node 1产生故障和网络中的其他节点通讯不上，在此期间node1产生了新的块0x2c52
+- node1故障期间 node2被选举成为了新的挖矿节点(leader)，产生了两个新的区块0xf0ec 和 0x839c。其中0xf0ec已经被其他节点记账
+- 假设node1恢复了通信，将0x2c52发送给其他节点，因为0x2c52的parent和现有的其他节点的最新区块header不一致，所以会被标记为no-op 无效区块
+- 而node2 发送的0x839c的parent和其他节点最新区块的header一致，所以会被其他节点接收，标记为extends 有效区块，记录在账本上
+
+对块“Extends”或者“No-op”的标记是在更上层完成的，并不由raft本身log记录机制实现。因为在raft内部，信息并不分为有效或无效，只有在区块链层面才会有有效区块和无效区块的含义。
+
+需要注意的是，Quorum的这种记账机制和本身Ethereum的LVC（最长链机制）是完全不一样的
+
+- LVC是为了解决链分叉问题
+- Raft本身的记账特性就决定了Quorum不会产生链的分叉
+
+#### 出块频率
+
+Quorum的出块频率默认是50ms一个块，可以通过 --raftblocktime 参数进行设置
+
+
+
+
 
 
 
