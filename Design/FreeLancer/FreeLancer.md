@@ -2,7 +2,9 @@
 
 ## 用例图
 
-{% plantuml %}
+![usercase](usercase.png)
+
+```uml
 
 left to right direction
 :用户: as User
@@ -57,4 +59,5 @@ User --> (账户管理)
 (账户管理) --> (加入会员):<<include>>
 (账户管理) --> (邀请朋友):<<include>>
 
-{% endplantuml %}
+```
+
