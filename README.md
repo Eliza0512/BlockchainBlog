@@ -20,6 +20,10 @@
 
 [Quorum介绍(二)：Quorum共识](Quorum/quorum2.md) updated at 12th Nov 2019
 
+[Quorum介绍(三)：Quorum授权许可系统](Quorum/quorum3.md) updated at 11 Dec 2019
+
+[Quorum介绍(四)：Quorum隐私体系之Tessera](Quorum/quorum4.md) updated at 11 Dec 2019
+
 ## Cosmos
 
 

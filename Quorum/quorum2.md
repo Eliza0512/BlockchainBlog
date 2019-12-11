@@ -266,5 +266,5 @@ Istanbul BFT算法中的区块是确定的，意味着链没有分叉并且合�
 
 上一篇：[Quorum介绍(一)：Quorum整体结构概述](https://eliza0512.github.io/BlockchainBlog/Quorum/quorum1.html)
 
-下一篇：
+下一篇：[Quorum介绍(三)：Quorum权限体系](https://eliza0512.github.io/BlockchainBlog/Quorum/quorum3.html)
 
