@@ -231,3 +231,4 @@ Quorum权限系统智能合约的设计遵循`Proxy-Implementation-Storage patte
 上一篇：[Quorum介绍(二)：Quorum共识](https://eliza0512.github.io/BlockchainBlog/Quorum/quorum2.html)
 
 下一篇：[Quorum介绍(四)：Quorum隐私体系之Tessera](https://eliza0512.github.io/BlockchainBlog/Quorum/quorum4.html)
+
